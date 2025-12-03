@@ -13,10 +13,12 @@ spec:
       targetPort: 15672
       nodePort: 30006
       protocol: TCP
+      name: management
     - port: 5672
       targetPort: 5672
       nodePort: 30007
       protocol: TCP
+      name: amqp
   selector:
     name: candlestick-rabbitmq-app-pod
     app: candlestick-rabbitmq-app
