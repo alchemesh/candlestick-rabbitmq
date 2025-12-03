@@ -13,7 +13,7 @@ jobs:
         #if: github.ref == 'refs/head/main'
         #needs: build_image_job
         outputs:
-          APP_INGRESS_URL: ${{ steps.set-ingress-host-id.outputs.APP_INGRESS_HOST}}
+          APP_INGRESS_URL: ${{ steps.set-loadbalancer-host-id.outputs.APP_INGRESS_HOST}}
         runs-on: self-hosted
         steps:
             - name: Checkout
@@ -56,7 +56,7 @@ jobs:
                   kubectl apply -f kubernetes/development
 
             - name: Set App Ingress Host URL
-              id: set-ingress-host-id
+              id: set-loadbalancer-host-id
               run: |
                   #echo "APP_INGRESS_HOST=$(kubectl -n ${{ vars.NAMESPACE }} get ingress -o json | jq -r '.items[] | .spec.rules[] | .host')" >> "$GITHUB_OUTPUT"
                   #echo $APP_INGRESS_HOST
